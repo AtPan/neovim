@@ -63,12 +63,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
         keymap(bufnr, "n", "gs", '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
         keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+        keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+        keymap(bufnr, "n", "ge", "<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<cr>", opts)
         keymap(bufnr, "n", "K", '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
         keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<cr>', opts)
         keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<cr>', opts)
         keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
         keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
-        --keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
         --keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
         vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format {async = true}' ]]
     end,
