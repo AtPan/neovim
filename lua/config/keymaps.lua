@@ -47,10 +47,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         vim.g.updatetime = 300
 
+        --[[
         vim.api.nvim_create_autocmd({ "CursorHold" }, {
             pattern = { "*" },
-            command = [[lua vim.diagnostic.open_float(nil, { focusable = false })]]
+            command = [[lua vim.diagnostic.open_float(nil, { focusable = false })] ]
         })
+        --]]
 
         local bufnr = args.buf
         local keymap = vim.api.nvim_buf_set_keymap
