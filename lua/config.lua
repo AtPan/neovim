@@ -19,6 +19,8 @@ vim.cmd [[syntax enable]]
 local vkopts = { noremap = true } -- Vim Keymap OPTionS
 
 -- Normal Mode
+vim.api.nvim_set_keymap('n', '<leader>vkm', '<cmd>tabnew ~/.config/nvim/lua/config.lua<cr>', vkopts)
+
 vim.api.nvim_set_keymap('n', '<leader>q', '0', vkopts)
 vim.api.nvim_set_keymap('n', '<leader>w', '^', vkopts)
 vim.api.nvim_set_keymap('n', '<leader>e', '$', vkopts)
@@ -28,19 +30,19 @@ vim.api.nvim_set_keymap('n', '<leader>vh', '<cmd>noh<cr>', vkopts)
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', vkopts)
 vim.api.nvim_set_keymap('n', '<leader>gst', '<cmd>Telescope git_status<cr>', vkopts)
 
-vim.api.nvim_set_keymap('n', 't1', '1gt', vkopts)
-vim.api.nvim_set_keymap('n', 't2', '2gt', vkopts)
-vim.api.nvim_set_keymap('n', 't3', '3gt', vkopts)
-vim.api.nvim_set_keymap('n', 't4', '4gt', vkopts)
-vim.api.nvim_set_keymap('n', 't5', '5gt', vkopts)
-vim.api.nvim_set_keymap('n', 't6', '6gt', vkopts)
-vim.api.nvim_set_keymap('n', 't7', '7gt', vkopts)
-vim.api.nvim_set_keymap('n', 't8', '8gt', vkopts)
-vim.api.nvim_set_keymap('n', 't9', '9gt', vkopts)
+vim.api.nvim_set_keymap('n', '1t', '1gt', vkopts)
+vim.api.nvim_set_keymap('n', '2t', '2gt', vkopts)
+vim.api.nvim_set_keymap('n', '3t', '3gt', vkopts)
+vim.api.nvim_set_keymap('n', '4t', '4gt', vkopts)
+vim.api.nvim_set_keymap('n', '5t', '5gt', vkopts)
+vim.api.nvim_set_keymap('n', '6t', '6gt', vkopts)
+vim.api.nvim_set_keymap('n', '7t', '7gt', vkopts)
+vim.api.nvim_set_keymap('n', '8t', '8gt', vkopts)
+vim.api.nvim_set_keymap('n', '9t', '9gt', vkopts)
 
 -- zo - Opens one level of the selected fold
 -- zc - Closes one level of the selected fold
-vim.api.nvim_set_keymap('n', '<leader><space>', 'za', vkopts) -- Toggles the selected fold
+-- za - Toggles one level of the selected fold
 vim.api.nvim_set_keymap('n', 'zro', 'zr', vkopts) -- Opens one level of all folds
 vim.api.nvim_set_keymap('n', 'zrc', 'zm', vkopts) -- Closes one level of all folds
 vim.api.nvim_set_keymap('n', 'Zro', 'zR', vkopts) -- Opens all levels of all folds
@@ -60,7 +62,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.g.updatetime = 300
 
         local bnr = args.buf
+        local lspopt = { noremap = true, silent = true }
+        
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>r", "<cmd>lua vim.lsp.buf.references()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader><space>", "<cmd>lua vim.lsp.buf.code_action()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", lspopt)
 
+        vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
     end,
     })
 
