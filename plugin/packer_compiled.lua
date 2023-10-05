@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -94,25 +99,10 @@ _G.packer_plugins = {
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["cmp-vsnip"] = {
+  cmp_luasnip = {
     loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
-  },
-  ctags = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/ctags",
-    url = "https://github.com/universal-ctags/ctags"
-  },
-  ["lightline.vim"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/lightline.vim",
-    url = "https://github.com/itchyny/lightline.vim"
-  },
-  ["nvim-bacon"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/nvim-bacon",
-    url = "https://github.com/Canop/nvim-bacon"
+    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -129,50 +119,20 @@ _G.packer_plugins = {
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-treesitter"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter"
-  },
-  ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/nvim-tree/nvim-web-devicons"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
-  },
-  ["palenight.vim"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/palenight.vim",
-    url = "https://github.com/drewtempelmeyer/palenight.vim"
   },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["popup.nvim"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/popup.nvim",
-    url = "https://github.com/nvim-lua/popup.nvim"
-  },
   ["rust-tools.nvim"] = {
     loaded = true,
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
-  },
-  syntastic = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/syntastic",
-    url = "https://github.com/vim-syntastic/syntastic"
-  },
-  tagbar = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/tagbar",
-    url = "https://github.com/preservim/tagbar"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -188,75 +148,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/antpan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
-  },
-  ["trouble.nvim"] = {
-    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/trouble.nvim",
-    url = "https://github.com/folke/trouble.nvim"
-  },
-  ["vim-airline"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-airline",
-    url = "https://github.com/vim-airline/vim-airline"
-  },
-  ["vim-better-whitespace"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-better-whitespace",
-    url = "https://github.com/ntpeters/vim-better-whitespace"
-  },
-  ["vim-gas"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-gas",
-    url = "https://github.com/shirk/vim-gas"
-  },
-  ["vim-illuminate"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-illuminate",
-    url = "https://github.com/RRethy/vim-illuminate"
-  },
-  ["vim-lion"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-lion",
-    url = "https://github.com/tommcdo/vim-lion"
-  },
-  ["vim-polyglot"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-polyglot",
-    url = "https://github.com/sheerun/vim-polyglot"
-  },
-  ["vim-racket"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-racket",
-    url = "https://github.com/wlangstroth/vim-racket"
-  },
-  ["vim-rainbow"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-rainbow",
-    url = "https://github.com/frazrepo/vim-rainbow"
-  },
-  ["vim-surround"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-surround",
-    url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-terminal"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-terminal",
-    url = "https://github.com/tc50cal/vim-terminal"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/antpan/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

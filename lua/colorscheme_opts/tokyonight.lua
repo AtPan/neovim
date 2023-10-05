@@ -1,14 +1,14 @@
-local tokyonight_status, tokyonight = pcall(require, 'tokyonight')
+local tokyonight_status, tn = pcall(require, 'tokyonight')
 
 if not tokyonight_status then
     return
 end
 
-tokyonight.setup({
-    style = "moon",
+tn.setup({
+    style = "storm",
     terminal_colors = false,
     styles = {
-        comments = { italic = true },
+        comments = {},
         keywords = {},
         functions = {},
         variables = {},
@@ -23,8 +23,6 @@ tokyonight.setup({
     lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 })
 
-local lualine_status, lualine = pcall(require, 'lualine')
-
 if lualine_status then
     lualine.setup({
         options = {
@@ -32,5 +30,3 @@ if lualine_status then
         }
     })
 end
-
-vim.cmd [[colorscheme tokyonight]]
