@@ -15,6 +15,32 @@ vim.o.termguicolors = true
 -- Vim Commands
 vim.cmd [[syntax enable]]
 
+-- Vim Folds
+vim.o.foldmethod = 'marker'
+vim.opt.foldcolumn = '2'
+
+-- Vim Autocmds
+vim.api.nvim_create_autocmd('BufWritePost', {
+        callback = function(args)
+            vim.cmd [[mkview]]
+        end,
+    })
+vim.api.nvim_create_autocmd('FileWritePost', {
+        callback = function(args)
+            vim.cmd [[mkview]]
+        end,
+    })
+vim.api.nvim_create_autocmd('BufReadPost', {
+        callback = function(args)
+            vim.cmd [[silent! loadview]]
+        end,
+    })
+vim.api.nvim_create_autocmd('FileReadPost', {
+        callback = function(args)
+            vim.cmd [[silent! loadview]]
+        end,
+    })
+
 -- NVim Keybinds
 local vkopts = { noremap = true } -- Vim Keymap OPTionS
 
@@ -56,7 +82,7 @@ vim.api.nvim_set_keymap('i', '<leader>dd', '<esc>ddO', vkopts)
 vim.api.nvim_set_keymap('v', '<leader>"', '<esc>a"<esc>gvo<esc>i"<esc>gvo"', vkopts)
 vim.api.nvim_set_keymap('v', '=', '+', vkopts)
 
--- LSP
+-- Global LSP
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         vim.g.updatetime = 300
@@ -64,41 +90,49 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local bnr = args.buf
         local lspopt = { noremap = true, silent = true }
         
-        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>r", "<cmd>lua vim.lsp.buf.references()<cr>", lspopt)
-        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspopt)
-        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader><space>", "<cmd>lua vim.lsp.buf.code_action()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>cr", "<cmd>lua vim.lsp.buf.references()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>cn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "D", "<cmd>lua vim.lsp.buf.definition()<cr>", lspopt)
         vim.api.nvim_buf_set_keymap(bnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "F", "<cmd>lua vim.diagnostic.open_float()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>gn", "<cmd>lua vim.diagnostic.get_next()<cr>", lspopt)
+        vim.api.nvim_buf_set_keymap(bnr, "n", "<leader>gp", "<cmd>lua vim.diagnostic.get_prev()<cr>", lspopt)
 
         vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
     end,
     })
 
--- Misc.
 
--- Vim Folds
-vim.o.foldmethod = 'marker'
-vim.opt.foldcolumn = '2'
+local cmp = require('cmp')
+-- Exports for mappings needed in other files and methods
+local scroll_next_item = function(fallback)
+    if cmp.visible() then
+        cmp.select_next_item()
+    else
+        fallback()
+    end
+end
 
--- Vim Autocmds
-vim.api.nvim_create_autocmd('BufWritePost', {
-        callback = function(args)
-            vim.cmd [[mkview]]
-        end,
-    })
-vim.api.nvim_create_autocmd('FileWritePost', {
-        callback = function(args)
-            vim.cmd [[mkview]]
-        end,
-    })
-vim.api.nvim_create_autocmd('BufReadPost', {
-        callback = function(args)
-            vim.cmd [[silent! loadview]]
-        end,
-    })
-vim.api.nvim_create_autocmd('FileReadPost', {
-        callback = function(args)
-            vim.cmd [[silent! loadview]]
-        end,
-    })
+local scroll_prev_item = function(fallback)
+    if cmp.visible() then
+        cmp.select_prev_item()
+    else
+        fallback()
+    end
+end
 
--- Fold colorscheme is controled by Foldedguifg
+local keymaps = {
+    cmp_keymaps = {
+        ['<Tab>'] = cmp.mapping(scroll_next_item, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(scroll_prev_item, { 'i', 's' }),
+        ['<CR>'] = cmp.mapping.confirm { select = true },
+        ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c', }),
+        ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c', }),
+    },
+
+    rust_analyzer_keymaps = function(bufnr)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>re', '<cmd>RustRun<cr>', {noremap = true})
+    end,
+}
+
+return keymaps
