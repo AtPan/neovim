@@ -33,4 +33,9 @@ return packer.startup(function(use)
 
     use 'ziglang/zig.vim'
 
+    use 'ryanoasis/vim-devicons'
+    use 'nvim-tree/nvim-web-devicons'
+
+    use 'mfussenegger/nvim-jdtls'
+
     end)

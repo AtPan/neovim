@@ -1,4 +1,5 @@
-require('config')
 require('plugins')
+require('config')
 require('color')
 require('lsp')
+require('code')

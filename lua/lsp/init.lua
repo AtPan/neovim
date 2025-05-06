@@ -17,7 +17,12 @@ lsp_options.capabilities = cmp_opts.make_server_capabilities_with_cmp(lsp_option
 -- Clangd lsp options
 clangd_opts = require('lsp.clangd_opts')
 clangd_opts.capabilities = lsp_options.capabilities
-lc.clangd.setup(clangd_opts.opts)
+lc.clangd.setup(clangd_opts)
+
+-- Jedi_language_server options
+jls_opts = require('lsp.jls_opts')
+jls_opts.capabilities = lsp_options.capabilities
+lc.jedi_language_server.setup(jls_opts.opts)
 
 -- Hls lsp options
 hls_opts = require('lsp.hls_opts')
@@ -32,7 +37,16 @@ rust_tools.setup(rust_analyzer_opts)
 
 local zls_opts = require('lsp.zls_opts')
 zls_opts.capabilities = lsp_options.capabilities
-lc.zls.setup(zls_opts.opts)
+lc.zls.setup(zls_opts)
+--[[
+vim.api.nvim_create_autocmd("FileType", {
+    pattern="zig",
+    callback = function(args)
+        vim.lsp.start(zls_opts)
+    end
+})
+]]--
+
 
 -- look at :help lspconfig-setup
 -- goal: if error or warning, display on left side and show details when hovered

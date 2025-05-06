@@ -18,17 +18,49 @@ opts.setup = function()
     -- Alter how vim diagnostics operate
     vim.diagnostic.config({
         underline = true,
-        virtual_text = false,
+        virtual_text = {
+            severity = {
+                vim.diagnostic.severity.ERROR,
+            },
+            prefix = string.format('%s ', signs[1].text),
+        },
         signs = true,
         severity_sort = true,
         update_in_insert = true,
         float = {
             focusable = false,
             source = false,
-            border = "rounded",
+            severity_sort = true,
+            border = "double",
             header = "",
             prefix = "",
+            suffix = "",
+            format = function(diagnostic)
+                local sign = ""
+                if diagnostic.severity == vim.diagnostic.severity.ERROR then
+                    sign = signs[1].text
+                elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+                    sign = signs[2].text
+                elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+                    sign = signs[3].text
+                else
+                    sign = signs[4].text
+                end
+                return string.format('%s    %s', sign, diagnostic.message)
+            end,
         },
+    })
+
+    vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+        callback = function(args)
+            vim.lsp.buf.document_highlight()
+        end,
+    })
+
+    vim.api.nvim_create_autocmd("CursorMoved", {
+        callback = function(args)
+            vim.lsp.buf.clear_references()
+        end,
     })
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

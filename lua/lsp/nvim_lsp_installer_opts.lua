@@ -5,17 +5,4 @@ end
 
 local global_lsp_options = require('lsp.global_lsp_options')
 
-lspi.setup({
-    --on_attach = global_lsp_options.on_attach,
-    --capabilities = global_lsp_options.capabilities,
-})
---[[
-lspi.on_server_ready(function(server)
-    local opts = {
-        on_attach = global_lsp_options.on_attach,
-        capabilities = global_lsp_options.capabilities,
-    }
-
-    server:setup(opts)
-end)
---]]
+lspi.setup()
